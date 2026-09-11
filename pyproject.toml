@@ -1,0 +1,13 @@
+[project]
+name = "ComfyUI-JoyCaption-fork"
+description = "JoyCaption GGUF captioning via llama-cli. Requires the ComfyUI-llama-cli installer extension."
+version = "1.0.0"
+license = {text = "GPL-3.0"}
+dependencies = ["huggingface_hub>=0.19.0", "numpy", "Pillow>=10.0.0"]
+
+[project.urls]
+Repository = "https://github.com/mckey-dev/ComfyUI-JoyCaption-fork"
+
+[tool.comfy]
+PublisherId = "mckey-dev"
+DisplayName = "JoyCaption fork"

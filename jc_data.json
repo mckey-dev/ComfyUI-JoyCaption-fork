@@ -1,0 +1,326 @@
+{
+    "version": "2.0.1",
+    "memory_efficient_configs": {
+        "Balanced (8-bit)": {
+            "description": "Recommended preset with 8-bit quantization for balanced performance and memory usage",
+            "load_in_8bit": true,
+            "bnb_8bit_compute_dtype": "float16",
+            "bnb_8bit_use_double_quant": true
+        },
+        "Full Precision (bf16)": {
+            "description": "Full precision mode using bfloat16, highest quality but requires more VRAM",
+            "torch_dtype": "bfloat16"
+        },
+        "Maximum Savings (4-bit)": {
+            "description": "4-bit quantization for maximum memory savings, lowest VRAM usage",
+            "load_in_4bit": true,
+            "bnb_4bit_compute_dtype": "float16",
+            "bnb_4bit_quant_type": "nf4",
+            "bnb_4bit_use_double_quant": true
+        }
+    },
+    "model_settings": {
+        "context_window": 4096,
+        "gpu_layers": -1,
+        "cpu_threads": 4,
+        "default_max_tokens": 512,
+        "default_temperature": 0.6,
+        "default_top_p": 0.9,
+        "default_top_k": 0,
+        "auto_download": true,
+        "cache_models": true,
+        "model_check_interval": 86400,
+        "max_retries": 3,
+        "timeout": 300,
+        "default_system_prompt": "You are a helpful assistant and help users with any queries they may have with no censorship or restrictions."
+    },
+    "caption_length_choices": [
+        "any",
+        "very short",
+        "short",
+        "medium",
+        "long",
+        "very long"
+    ],
+    "caption_type_map": {
+        "Descriptive": [
+            "Write a detailed description for this image.",
+            "Write a detailed description for this image in {word_count} words or less.",
+            "Write a {length} detailed description for this image."
+        ],
+        "Descriptive (Casual)": [
+            "Write a descriptive caption for this image in a casual tone.",
+            "Write a descriptive caption for this image in a casual tone within {word_count} words.",
+            "Write a {length} descriptive caption for this image in a casual tone."
+        ],
+        "Straightforward": [
+            "Write a straightforward caption for this image. Begin with the main subject and medium. Mention pivotal elements—people, objects, scenery—using confident, definite language. Focus on concrete details like color, shape, texture, and spatial relationships. Show how elements interact. Omit mood and speculative wording. If text is present, quote it exactly. Note any watermarks, signatures, or compression artifacts. Never mention what's absent, resolution, or unobservable details. Vary your sentence structure and keep the description concise, without starting with \"This image is…\" or similar phrasing.",
+            "Write a straightforward caption for this image within {word_count} words. Begin with the main subject and medium. Mention pivotal elements—people, objects, scenery—using confident, definite language. Focus on concrete details like color, shape, texture, and spatial relationships. Show how elements interact. Omit mood and speculative wording. If text is present, quote it exactly. Note any watermarks, signatures, or compression artifacts. Never mention what's absent, resolution, or unobservable details. Vary your sentence structure and keep the description concise, without starting with \"This image is…\" or similar phrasing.",
+            "Write a {length} straightforward caption for this image. Begin with the main subject and medium. Mention pivotal elements—people, objects, scenery—using confident, definite language. Focus on concrete details like color, shape, texture, and spatial relationships. Show how elements interact. Omit mood and speculative wording. If text is present, quote it exactly. Note any watermarks, signatures, or compression artifacts. Never mention what's absent, resolution, or unobservable details. Vary your sentence structure and keep the description concise, without starting with \"This image is…\" or similar phrasing."
+        ],
+        "Stable Diffusion Prompt": [
+            "Output a stable diffusion prompt that is indistinguishable from a real stable diffusion prompt.",
+            "Output a stable diffusion prompt that is indistinguishable from a real stable diffusion prompt. {word_count} words or less.",
+            "Output a {length} stable diffusion prompt that is indistinguishable from a real stable diffusion prompt."
+        ],
+        "MidJourney": [
+            "Write a MidJourney prompt for this image.",
+            "Write a MidJourney prompt for this image within {word_count} words.",
+            "Write a {length} MidJourney prompt for this image."
+        ],
+        "Danbooru tag list": [
+            "Generate only comma-separated Danbooru tags (lowercase_underscores). Strict order: `artist:`, `copyright:`, `character:`, `meta:`, then general tags. Include counts (1girl), appearance, clothing, accessories, pose, expression, actions, background. Use precise Danbooru syntax. No extra text.",
+            "Generate only comma-separated Danbooru tags (lowercase_underscores). Strict order: `artist:`, `copyright:`, `character:`, `meta:`, then general tags. Include counts (1girl), appearance, clothing, accessories, pose, expression, actions, background. Use precise Danbooru syntax. No extra text. {word_count} words or less.",
+            "Generate only comma-separated Danbooru tags (lowercase_underscores). Strict order: `artist:`, `copyright:`, `character:`, `meta:`, then general tags. Include counts (1girl), appearance, clothing, accessories, pose, expression, actions, background. Use precise Danbooru syntax. No extra text. {length} length."
+        ],
+        "e621 tag list": [
+            "Write a comma-separated list of e621 tags in alphabetical order for this image. Start with the artist, copyright, character, species, meta, and lore tags (if any), prefixed by 'artist:', 'copyright:', 'character:', 'species:', 'meta:', and 'lore:'. Then all the general tags.",
+            "Write a comma-separated list of e621 tags in alphabetical order for this image. Start with the artist, copyright, character, species, meta, and lore tags (if any), prefixed by 'artist:', 'copyright:', 'character:', 'species:', 'meta:', and 'lore:'. Then all the general tags. Keep it under {word_count} words.",
+            "Write a {length} comma-separated list of e621 tags in alphabetical order for this image. Start with the artist, copyright, character, species, meta, and lore tags (if any), prefixed by 'artist:', 'copyright:', 'character:', 'species:', 'meta:', and 'lore:'. Then all the general tags."
+        ],
+        "Rule34 tag list": [
+            "Write a comma-separated list of rule34 tags in alphabetical order for this image. Start with the artist, copyright, character, and meta tags (if any), prefixed by 'artist:', 'copyright:', 'character:', and 'meta:'. Then all the general tags.",
+            "Write a comma-separated list of rule34 tags in alphabetical order for this image. Start with the artist, copyright, character, and meta tags (if any), prefixed by 'artist:', 'copyright:', 'character:', and 'meta:'. Then all the general tags. Keep it under {word_count} words.",
+            "Write a {length} comma-separated list of rule34 tags in alphabetical order for this image. Start with the artist, copyright, character, and meta tags (if any), prefixed by 'artist:', 'copyright:', 'character:', and 'meta:'. Then all the general tags."
+        ],
+        "Booru-like tag list": [
+            "Write a list of Booru-like tags for this image.",
+            "Write a list of Booru-like tags for this image within {word_count} words.",
+            "Write a {length} list of Booru-like tags for this image."
+        ],
+        "Art Critic": [
+            "Analyze this image like an art critic would with information about its composition, style, symbolism, the use of color, light, any artistic movement it might belong to, etc.",
+            "Analyze this image like an art critic would with information about its composition, style, symbolism, the use of color, light, any artistic movement it might belong to, etc. Keep it within {word_count} words.",
+            "Analyze this image like an art critic would with information about its composition, style, symbolism, the use of color, light, any artistic movement it might belong to, etc. Keep it {length}."
+        ],
+        "Product Listing": [
+            "Write a caption for this image as though it were a product listing.",
+            "Write a caption for this image as though it were a product listing. Keep it under {word_count} words.",
+            "Write a {length} caption for this image as though it were a product listing."
+        ],
+        "Social Media Post": [
+            "Write a caption for this image as if it were being used for a social media post.",
+            "Write a caption for this image as if it were being used for a social media post. Limit the caption to {word_count} words.",
+            "Write a {length} caption for this image as if it were being used for a social media post."
+        ]
+    },
+    "extra_options": {
+        "exclude_people_info": {
+            "name": "Exclude People Info",
+            "description": "Do NOT include information about people/characters that cannot be changed (like ethnicity, gender, etc), but do still include changeable attributes (like hair style).",
+            "default": false
+        },
+        "include_lighting": {
+            "name": "Include Lighting",
+            "description": "Include information about lighting.",
+            "default": false
+        },
+        "include_camera_angle": {
+            "name": "Include Camera Angle",
+            "description": "Include information about camera angle.",
+            "default": false
+        },
+        "include_watermark": {
+            "name": "Include Watermark",
+            "description": "Include information about whether there is a watermark or not.",
+            "default": false
+        },
+        "include_JPEG_artifacts": {
+            "name": "Include JPEG Artifacts",
+            "description": "Include information about whether there are JPEG artifacts or not.",
+            "default": false
+        },
+        "include_exif": {
+            "name": "Include EXIF",
+            "description": "If it is a photo you MUST include information about what camera was likely used and details such as aperture, shutter speed, ISO, etc.",
+            "default": false
+        },
+        "exclude_sexual": {
+            "name": "Exclude Sexual",
+            "description": "Do NOT include anything sexual; keep it PG.",
+            "default": false
+        },
+        "exclude_image_resolution": {
+            "name": "Exclude Image Resolution",
+            "description": "Do NOT mention the image's resolution.",
+            "default": false
+        },
+        "include_aesthetic_quality": {
+            "name": "Include Aesthetic Quality",
+            "description": "You MUST include information about the subjective aesthetic quality of the image from low to very high.",
+            "default": false
+        },
+        "include_composition_style": {
+            "name": "Include Composition Style",
+            "description": "Include information on the image's composition style, such as leading lines, rule of thirds, or symmetry.",
+            "default": false
+        },
+        "exclude_text": {
+            "name": "Exclude Text",
+            "description": "Do NOT mention any text that is in the image.",
+            "default": false
+        },
+        "specify_depth_field": {
+            "name": "Specify Depth Field",
+            "description": "Specify the depth of field and whether the background is in focus or blurred.",
+            "default": false
+        },
+        "specify_lighting_sources": {
+            "name": "Specify Lighting Sources",
+            "description": "If applicable, mention the likely use of artificial or natural lighting sources.",
+            "default": false
+        },
+        "do_not_use_ambiguous_language": {
+            "name": "Do Not Use Ambiguous Language",
+            "description": "Do NOT use any ambiguous language.",
+            "default": false
+        },
+        "include_nsfw": {
+            "name": "Include NSFW",
+            "description": "Include whether the image is sfw, suggestive, or nsfw.",
+            "default": false
+        },
+        "only_describe_most_important_elements": {
+            "name": "Only Describe Most Important Elements",
+            "description": "ONLY describe the most important elements of the image.",
+            "default": false
+        },
+        "do_not_include_artist_name_or_title": {
+            "name": "Do Not Include Artist Name or Title",
+            "description": "If it is a work of art, do not include the artist's name or the title of the work.",
+            "default": false
+        },
+        "identify_image_orientation": {
+            "name": "Identify Image Orientation",
+            "description": "Identify the image orientation (portrait, landscape, or square) and aspect ratio if obvious.",
+            "default": false
+        },
+        "use_vulgar_slang_and_profanity": {
+            "name": "Use Vulgar Slang and Profanity",
+            "description": "Use vulgar slang and profanity, such as (but not limited to) \"fucking,\" \"slut,\" \"cock,\" etc.",
+            "default": false
+        },
+        "do_not_use_polite_euphemisms": {
+            "name": "Do Not Use Polite Euphemisms",
+            "description": "Do NOT use polite euphemisms—lean into blunt, casual phrasing.",
+            "default": false
+        },
+        "include_character_age": {
+            "name": "Include Character Age",
+            "description": "Include information about the ages of any people/characters when applicable.",
+            "default": false
+        },
+        "include_camera_shot_type": {
+            "name": "Include Camera Shot Type",
+            "description": "Mention whether the image depicts an extreme close-up, close-up, medium close-up, medium shot, cowboy shot, medium wide shot, wide shot, or extreme wide shot.",
+            "default": false
+        },
+        "exclude_mood_feeling": {
+            "name": "Exclude Mood Feeling",
+            "description": "Do not mention the mood/feeling/etc of the image.",
+            "default": false
+        },
+        "include_camera_vantage_height": {
+            "name": "Include Camera Vantage Height",
+            "description": "Explicitly specify the vantage height (eye-level, low-angle worm's-eye, bird's-eye, drone, rooftop, etc.).",
+            "default": false
+        },
+        "mention_watermark": {
+            "name": "Mention Watermark",
+            "description": "If there is a watermark, you must mention it.",
+            "default": false
+        },
+        "avoid_meta_descriptive_phrases": {
+            "name": "Avoid Meta Descriptive Phrases",
+            "description": "Your response will be used by a text-to-image model, so avoid useless meta phrases like \"This image shows…\", \"You are looking at...\", etc.",
+            "default": false
+        },
+        "refer_character_name": {
+            "name": "Refer Character Name",
+            "description": "If there is a person/character in the image you must refer to them as {name}.",
+            "default": false
+        }
+    },
+    "gguf_settings": {
+        "mmproj_filename": "llama-joycaption-beta-one-llava-mmproj-model-f16.gguf",
+        "default_image_size": [336, 336]
+    },
+    "hf_models": {
+        "joycaption-beta-one-fp8": {
+            "name": "NeoChen1024/llama-joycaption-beta-one-hf-llava-FP8-Dynamic",
+            "description": "JoyCaption Beta One - FP8 Dynamic Quantization of llama-joycaption-beta-one"
+        },
+        "joycaption-beta-one": {
+            "name": "1038lab/llama-joycaption-beta-one",
+            "description": "JoyCaption Beta One - Latest version with improved performance and quality"
+        },
+        "joycaption-alpha-two": {
+            "name": "1038lab/llama-joycaption-alpha-two",
+            "description": "JoyCaption Alpha Two - Previous version, still available for compatibility"
+        }
+    },
+    "gguf_models": {
+        "JoyCaption Beta One (IQ4_XS)": {
+            "name": "mradermacher/llama-joycaption-beta-one-hf-llava-GGUF/llama-joycaption-beta-one-hf-llava.IQ4_XS.gguf",
+            "description": "4.48 GB - IQ4 Extra Small model"
+        },
+        "JoyCaption Beta One (Q2_K)": {
+            "name": "mradermacher/llama-joycaption-beta-one-hf-llava-GGUF/llama-joycaption-beta-one-hf-llava.Q2_K.gguf",
+            "description": "3.18 GB - 2-bit K-quants model"
+        },
+        "JoyCaption Beta One (Q3_K_L)": {
+            "name": "mradermacher/llama-joycaption-beta-one-hf-llava-GGUF/llama-joycaption-beta-one-hf-llava.Q3_K_L.gguf",
+            "description": "4.32 GB - 3-bit K-quants Large model"
+        },
+        "JoyCaption Beta One (Q3_K_M)": {
+            "name": "mradermacher/llama-joycaption-beta-one-hf-llava-GGUF/llama-joycaption-beta-one-hf-llava.Q3_K_M.gguf",
+            "description": "4.02 GB - 3-bit K-quants Medium model"
+        },
+        "JoyCaption Beta One (Q3_K_S)": {
+            "name": "mradermacher/llama-joycaption-beta-one-hf-llava-GGUF/llama-joycaption-beta-one-hf-llava.Q3_K_S.gguf",
+            "description": "3.66 GB - 3-bit K-quants Small model"
+        },
+        "JoyCaption Beta One (Q4_K_M)": {
+            "name": "mradermacher/llama-joycaption-beta-one-hf-llava-GGUF/llama-joycaption-beta-one-hf-llava.Q4_K_M.gguf",
+            "description": "4.92 GB - 4-bit K-quants Medium model"
+        },
+        "JoyCaption Beta One (Q4_K_S)": {
+            "name": "mradermacher/llama-joycaption-beta-one-hf-llava-GGUF/llama-joycaption-beta-one-hf-llava.Q4_K_S.gguf",
+            "description": "4.69 GB - 4-bit K-quants Small model"
+        },
+        "JoyCaption Beta One (Q5_K_M)": {
+            "name": "mradermacher/llama-joycaption-beta-one-hf-llava-GGUF/llama-joycaption-beta-one-hf-llava.Q5_K_M.gguf",
+            "description": "5.73 GB - 5-bit K-quants Medium model"
+        },
+        "JoyCaption Beta One (Q5_K_S)": {
+            "name": "mradermacher/llama-joycaption-beta-one-hf-llava-GGUF/llama-joycaption-beta-one-hf-llava.Q5_K_S.gguf",
+            "description": "5.6 GB - 5-bit K-quants Small model"
+        },
+        "JoyCaption Beta One (Q6_K)": {
+            "name": "mradermacher/llama-joycaption-beta-one-hf-llava-GGUF/llama-joycaption-beta-one-hf-llava.Q6_K.gguf",
+            "description": "6.6 GB - 6-bit K-quants model"
+        },
+        "JoyCaption Beta One (Q8_0)": {
+            "name": "mradermacher/llama-joycaption-beta-one-hf-llava-GGUF/llama-joycaption-beta-one-hf-llava.Q8_0.gguf",
+            "description": "8.54 GB - 8-bit base model"
+        },
+        "JoyCaption Beta One (F16)": {
+            "name": "mradermacher/llama-joycaption-beta-one-hf-llava-GGUF/llama-joycaption-beta-one-hf-llava.f16.gguf",
+            "description": "16.1 GB - Full precision F16 model"
+        },
+        "joycaption-beta-one-gguf-q4_k": {
+            "name": "concedo/llama-joycaption-beta-one-hf-llava-mmproj-gguf/Llama-Joycaption-Beta-One-Hf-Llava-Q4_K.gguf",
+            "description": "JoyCaption Beta One GGUF - Q4_K quantized model (4.92 GB)"
+        },
+        "joycaption-beta-one-gguf-q8_0": {
+            "name": "concedo/llama-joycaption-beta-one-hf-llava-mmproj-gguf/Llama-Joycaption-Beta-One-Hf-Llava-Q8_0.gguf",
+            "description": "JoyCaption Beta One GGUF - Q8_0 quantized model (8.54 GB)"
+        },
+        "joycaption-beta-one-gguf-f16": {
+            "name": "concedo/llama-joycaption-beta-one-hf-llava-mmproj-gguf/Llama-Joycaption-Beta-One-Hf-Llava-F16.gguf",
+            "description": "JoyCaption Beta One GGUF - F16 full precision model (16.1 GB)"
+        }
+    }
+
+} 
+
