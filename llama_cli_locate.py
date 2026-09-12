@@ -32,17 +32,29 @@ def _custom_node_roots() -> list[Path]:
     return roots
 
 
+def _package_dirs(root: Path):
+    wanted = PACKAGE_DIR_NAME.casefold()
+    try:
+        children = root.iterdir()
+    except OSError:
+        return
+    for child in children:
+        if child.is_dir() and child.name.casefold() == wanted:
+            yield child
+
+
 def load_llama_cli_installer():
     for root in _custom_node_roots():
-        binary = root / PACKAGE_DIR_NAME / "llama_binary.py"
-        if not binary.is_file():
-            continue
-        spec = importlib.util.spec_from_file_location("comfyui_llama_cli_binary", binary)
-        if spec is None or spec.loader is None:
-            continue
-        module = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(module)
-        return module
+        for package in _package_dirs(root):
+            binary = package / "llama_binary.py"
+            if not binary.is_file():
+                continue
+            spec = importlib.util.spec_from_file_location("comfyui_llama_cli_binary", binary)
+            if spec is None or spec.loader is None:
+                continue
+            module = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(module)
+            return module
     raise RuntimeError(MISSING_INSTALLER)
 
 
