@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import importlib.util
+import sys
 from pathlib import Path
 
 
@@ -53,7 +54,12 @@ def load_llama_cli_installer():
             if spec is None or spec.loader is None:
                 continue
             module = importlib.util.module_from_spec(spec)
-            spec.loader.exec_module(module)
+            sys.modules[spec.name] = module
+            try:
+                spec.loader.exec_module(module)
+            except Exception:
+                sys.modules.pop(spec.name, None)
+                raise
             return module
     raise RuntimeError(MISSING_INSTALLER)
 
